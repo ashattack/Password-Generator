@@ -1,3 +1,7 @@
+var characterCount;
+var numbers;
+var specialCharacters;
+
 //arrays
 //Special Characters 
 specialCharacters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "+", "=", "-", "_", "?", ">", "<"];
@@ -7,6 +11,8 @@ numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 //letters 
 letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+
+var options;
 
 //Uppercase Conversion
 space = [];
@@ -18,7 +24,7 @@ uppers = letters.map(upLetters);
 
 var generateBtn = document.querySelector("#generate");
 
-get.addEventListener("click,", function () { 
+generateBtn.addEventListener("click,", function () { 
   pass = generatePassword();
   document.getElementById("password").placeholder = pass;
 });
@@ -46,6 +52,12 @@ function generatePassword() {
     var upperCase = confirm("Do you want upper case in your password?");
     var lowerCase = confirm("Do you want lower case in your password?");
   };
+  // If user does not pick any confirms 
+  if (!numbers && !specialCharacters && !upperCase && !lowerCase) {
+    options = alert("You must accept at least one.");
+  }
+
+
 }
 
 function writePassword() {
