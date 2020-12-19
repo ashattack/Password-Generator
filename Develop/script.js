@@ -71,40 +71,50 @@ function generatePassword() {
     var confirmUpperCase = confirm("Do you want upper case in your password?");
     var confirmLowerCase = confirm("Do you want lower case in your password?");
 
-    //If user does not pick any confirms 
-    if (confirmNumbers || confirmSpecialCharacters || confirmUpperCase || confirmLowerCase) {
-      alert("You must accept at least one.");
+    var brains = [confirmNumbers, confirmSpecialCharacters , confirmUpperCase, confirmLowerCase]
 
-      // If user accepts all confirms 
-    } else if (confirmNumbers && confirmSpecialCharacters && confirmUpperCase && confirmLowerCase) {
-      options = specialCharacters.concat(numbers, specialCharacters, letters, uppers);
+    // If user accepts all confirms 
+    if (brains.some(Boolean)) {
+      // options = specialCharacters.concat(numbers, specialCharacters, letters, uppers);
+
+      if (confirmNumbers)
+        options = options.concat(numbers);
+
+      if (confirmSpecialCharacters)
+        options = options.concat(specialCharacters);
+
+      if (confirmUpperCase)
+        options = options.concat(uppers);
+
+      if (confirmLowerCase)
+        options = options.concat(letters);
+
+      console.log("options", options);
       allGood = true;
-      console.log(specialCharacters);
+    } else {
+      //If user does not pick any confirms 
+      alert("You must accept at least one.");
     }
   }
-var password = "";
-for (var i = 0; i < characterCount; i++){
-  var item = options[Math.floor(Math.random() * options.length)]
-  password += item
-}
 
-  
-console.log(options);
-console.log(password);
-return password;
+  var password = "";
+  for (var i = 0; i < characterCount; i++) {
+    var item = options[Math.floor(Math.random() * options.length)]
+    password += item
+  }
 
-
+  console.log(options);
+  console.log(password);
+  return password;
 }
 
 function writePassword() {
   //parseInt makes the computer look for an integer
 
-
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
