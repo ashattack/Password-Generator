@@ -24,46 +24,82 @@ uppers = letters.map(upLetters);
 
 var generateBtn = document.querySelector("#generate");
 
-generateBtn.addEventListener("click,", function () { 
+generateBtn.addEventListener("click,", function () {
   pass = generatePassword();
   document.getElementById("password").placeholder = pass;
 });
 
 
 
+function isGoodNumber(userNumber) {
+  if (typeof userNumber != "number") {
+    return false;
+  } else if (userNumber < 8 || userNumber > 128) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 
 // function for generating password
 function generatePassword() {
-  
+
+  var options = [];
   //Asks user 
-  var characterCount = parseInt(prompt("How many characters do you want your password to be?"));
-  
-  // Creating an if statement if user doesnt input allowed character amount
-  if (characterCount === null){
-    alert("Please input a number");
-  } else if (characterCount < 8) {
-    characterCount = parseInt(prompt("Password too short! Please input a number greater than 8."));
-  } else if (characterCount > 128){
-    characterCount = parseInt(prompt("Password too long! Please shorten to less than 128 characters."));
-  } else {
-    //User confirms 
-    var numbers = confirm("Do you want numbers in your password?");
-    var specialCharacters = confirm("Do you want special characters in your password?");
-    var upperCase = confirm("Do you want upper case in your password?");
-    var lowerCase = confirm("Do you want lower case in your password?");
-  };
-  // If user does not pick any confirms 
-  if (!numbers && !specialCharacters && !upperCase && !lowerCase) {
-    options = alert("You must accept at least one.");
+  var characterCount = "floof"
+  while (!isGoodNumber(characterCount)) {
+    characterCount = parseInt(prompt("How many characters do you want your password to be?")) || "floof";
+
+    // Creating an if statement if user doesnt input allowed character amount
+    if (characterCount === null) {
+      alert("Please input a number");
+    } else if (characterCount < 8) {
+      alert("Password too short! Please input a number greater than 8.");
+    } else if (characterCount > 128) {
+      alert("Password too long! Please shorten to less than 128 characters.");
+    };
+
+    console.log(characterCount);
   }
+
+  var allGood = false;
+  while (!allGood) {
+    //user confirms
+    var confirmNumbers = confirm("Do you want numbers in your password?");
+    var confirmSpecialCharacters = confirm("Do you want special characters in your password?");
+    var confirmUpperCase = confirm("Do you want upper case in your password?");
+    var confirmLowerCase = confirm("Do you want lower case in your password?");
+
+    //If user does not pick any confirms 
+    if (confirmNumbers || confirmSpecialCharacters || confirmUpperCase || confirmLowerCase) {
+      alert("You must accept at least one.");
+
+      // If user accepts all confirms 
+    } else if (confirmNumbers && confirmSpecialCharacters && confirmUpperCase && confirmLowerCase) {
+      options = specialCharacters.concat(numbers, specialCharacters, letters, uppers);
+      allGood = true;
+      console.log(specialCharacters);
+    }
+  }
+var password = "";
+for (var i = 0; i < characterCount; i++){
+  var item = options[Math.floor(Math.random() * options.length)]
+  password += item
+}
+
+  
+console.log(options);
+console.log(password);
+return password;
 
 
 }
 
 function writePassword() {
   //parseInt makes the computer look for an integer
-  
-  
+
+
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
