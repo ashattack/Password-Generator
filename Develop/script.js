@@ -49,15 +49,15 @@ function generatePassword() {
   //Asks user 
   var characterCount = "floof"
   while (!isGoodNumber(characterCount)) {
-    characterCount = parseInt(prompt("How many characters do you want your password to be?")) || "floof";
+    characterCount = parseInt(prompt("How long do you want your password to be? Please enter a number.")) || "floof";
 
     // Creating an if statement if user doesnt input allowed character amount
     if (characterCount === null) {
-      alert("Please input a number");
+      alert("Where is your answer?");
     } else if (characterCount < 8) {
-      alert("Password too short! Please input a number greater than 8.");
+      alert("Malfunction! Password too short!");
     } else if (characterCount > 128) {
-      alert("Password too long! Please shorten to less than 128 characters.");
+      alert("How will you ever remember this? Enter a shorter password immediately.");
     };
 
     console.log(characterCount);
@@ -66,10 +66,10 @@ function generatePassword() {
   var allGood = false;
   while (!allGood) {
     //user confirms
-    var confirmNumbers = confirm("Do you want numbers in your password?");
-    var confirmSpecialCharacters = confirm("Do you want special characters in your password?");
-    var confirmUpperCase = confirm("Do you want upper case in your password?");
-    var confirmLowerCase = confirm("Do you want lower case in your password?");
+    var confirmNumbers = confirm("Do you wish to have numbers in your very random password?");
+    var confirmSpecialCharacters = confirm("Do you wish to have espically special characters in your very random password?");
+    var confirmUpperCase = confirm("Do you wish to have uppercase letters in your very random password?");
+    var confirmLowerCase = confirm("Do you wish to have lowercase in your very random password?");
 
     var brains = [confirmNumbers, confirmSpecialCharacters , confirmUpperCase, confirmLowerCase]
 
@@ -93,7 +93,7 @@ function generatePassword() {
       allGood = true;
     } else {
       //If user does not pick any confirms 
-      alert("You must accept at least one.");
+      alert("Please say OK to at least one, come on now.");
     }
   }
 
